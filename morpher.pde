@@ -75,10 +75,17 @@ void draw(){
         no1.get(i).lerp(no2.get(i), 0.35);
       }
     //Lerping visualisation, point by point
+    // better performance to write directly to the pixel array
+    
+    loadPixels();
+    color black = color(0);
     for(PVector v : no1){
       //curveVertex(v.x, v.y);
-      point(v.x, v.y);
+      int index = int(width * v.y + v.x);
+      pixels[index] = black;
     }
+    
+    updatePixels();
   }
   saveFrame("asd/line-######.png");
 }
